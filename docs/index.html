@@ -1,10 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Software Architecture , Innopolis 2018</title>
+    <title>Document rev art</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <style>
+        .text-back {
+            color: #fedaa4;
+        }
+
+        .contenidos-x a {
+            color: white;
+            text-decoration: none;
+            -webkit-transition: 0.5s;
+            -o-transition: 0.5s;
+            transition: 0.5s;
+        }
+
+        .contenidos-x a:hover {
+            color: #b68848;
+            text-decoration: none;
+        }
+
+        .img-main {
+            width: 10rem;
+            margin-top: 2rem;
+            animation: valnimation 7s linear 2s infinite alternate;
+        }
+
+        .enlaces-especiales a {
+            color: #ffffff;
+            font-size: 1.5rem;
+            -webkit-transition: 0.5s;
+            -o-transition: 0.5s;
+            transition: 0.5s;
+            animation: valnimation 3s linear 2s infinite alternate;
+
+        }
+
+        .enlaces-especiales a:hover {
+            color: #ffffff;
+            text-decoration: none;
+            opacity: 0.5
+        }
+
+        @keyframes valnimation {
+            from {
+                opacity: 1
+            }
+            to {
+                opacity: 0
+            }
+        }
+    </style>
 </head>
-<body>
-    <small> </small>
+
+<body style="background-color: #212121">
+
+
+
+    <div class="container text-center">
+        <img src="img/valravnx-1w.svg" alt="" class="img-fluid img-main">
+    </div>
+
+
+    <div class="container text-back">
+        <div class="row my-3">
+            <div class="col-12">
+
+                <h4 class="display-4">
+                    - Valravnx
+                </h4>
+                <P class="text-justify">La mayoria de material sobre estos temas esta publicada en idioma ingles, inicialmente me disponía a traducir mis ideas y publicar, compartir y extender ciertos conocimientos en idioma ingles, idioma original, pero considerando la escazes de material en español, mi idioma natal por cierto, prefiero disponer el material en español, Bienvenido</P>
+
+            </div>
+
+        </div>
+
+
+        <div class="row my-3">
+            <div class="col-6">
+                <h4>Acerca de este espacio</h4>
+                <p>Solo quiero compartir material y contenidos dispuestos a lo largo de mi experiencia, desde estudios universitarios, estudios de posgrado y estudios posteriores mios que juegan entorno a interes personales, cada enlance es un compilado de elementos que podría resultar de tu interes</p>
+
+                <p>NOTA: Muchos de los textos estan en Ingles, es sencillo obtenerlos a través de espacios como </p>
+                <ul class="enlaces-especiales">
+                    <li><a href="http://gen.lib.rus.ec/">http://gen.lib.rus.ec/</a></li>
+                    <li><a href="https://sci-hub.tw/">https://sci-hub.tw/</a></li>
+                </ul>
+
+                <p>Si te resulta dificil el idioma ingles, revisa las notas y analisis que planteo para cada uno, puede resultar de utilidad</p>
+
+            </div>
+            <div class="col-6 contenidos-x">
+                <h4>Contenidos</h4>
+                <ul>
+                    <li> <a href="#">Textos por tematicas</a></li>
+                    <ul>
+                        <li> <a href="#">Ingenieria inversa</a></li>
+                        <li> <a href="#">Gerencia y adminstracion de proyectos</a></li>
+                         <li> <a href="#">Textos C#</a></li>
+                        <li> <a href="#">Textos Python</a></li>
+                         <li> <a href="#">Textos C++</a></li>
+                          <li> <a href="#">Textos C</a></li>
+                        <li> <a href="#">Textos por tematicas</a></li>
+
+                    </ul>
+                    <li> <a href="#">Acerca de Frontend como herramienta</a></li>
+                    <li> <a href="#">Acerca de Backend como herramienta</a></li>
+                    <a href="#">Acerca de Gerencia y administración de proyectos</a>
+                    <li>
+                        <ul>
+                            <li><a href="#">
+                          Arquitectura de Software
+                      </a></li>
+                            <li><a href="#">
+                          Diseño y patrones de diseño de software
+                      </a></li>
+                            <li><a href="#">
+                          Analisis de sistemas
+                      </a></li>
+                            <li><a href="#">
+                          Artefactos de ingenieria de software
+                      </a></li>
+                        </ul>
+
+                    </li>
+                    <li><a href="">Ingenieria social y controversia</a></li>
+                    <li><a href="">Sobrero blanco</a></li>
+                    <li><a href="">Sobrero gris</a></li>
+                    <li><a href="">Sobrero negro</a></li>
+                    <li><a href="">Ciencia Ficción</a></li>
+                </ul>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+<footer>
+    <div class="container text-center my-3 py-3 text-white lead">
+        VALRAVNX 2018
+    </div>
+</footer>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
 </body>
+
 </html>
