@@ -36,3 +36,5 @@ In this course PHM was considered as a project in order to practice and apply th
 
 This term was first mentioned by Jeff Sutherland inside the Agile Manifesto itself as a way to improve practices, as a framework tool was also mentioned by Shaimaa Galal and Ehab Hassanein as a tool for generate a database solution with the help of a GUI, in order not to confuse Improved Agile as a  practice methodology for software management processes is called iagile, this was part of the Italian Army research "iAgile: Mission Critical Military Software Development" by Luigi Benedicenti, Alberto Sillitti and Angelo Messina.
 
+Maintained by Carlos Rojas - Innopolis 2018
+
