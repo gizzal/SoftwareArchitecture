@@ -1,0 +1,51 @@
+{% extends "web_app_base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="" style="display:block; width: 70%; margin: auto;">
+        <div class="panel" id="spy2">
+            <div class="panel-body pn">
+            <br>
+            <button class="btn-exceltable">REPORT</button>
+                <h3 style="margin-top: 50px">Vehicle repairment planning
+                    for {{ vehicle.name }}</h3>
+            <br>
+
+
+            <div class="exceltable">
+            {% for ss in subsystems %}
+
+                <table class="table footable" data-filter="#fooFilter">
+                    <thead>
+                    <tr>
+                        <th colspan="4" class="text-center">
+                            Subsystem: {{ ss.name }}</th>
+                    <tr>
+                    <tr>
+                        <th style="width: 50%">Sensor name</th>
+                        <th>Slug</th>
+                        <th>Is warning</th>
+                    </tr>
+                    </thead>
+                    {% for sensor in ss.sensor_set.all %}
+                        <tr>
+                            <td>{{ sensor.name }}</td>
+                            <td>{{ sensor.slug }}</td>
+
+                            <td>
+                                {% if vehicle.last_mission_point and sensor.slug in vehicle.last_mission_point.warning_sensor_list %}
+                                        +
+                                {%  endif %}
+
+                                </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+
+            {% endfor %}
+            </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+

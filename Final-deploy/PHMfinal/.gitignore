@@ -1,0 +1,6 @@
+.idea/
+/db.sqlite3
+*.pyc
+/optimus/local_settings.py
+staticfiles/
+venv/

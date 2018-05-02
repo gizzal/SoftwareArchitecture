@@ -1,0 +1,123 @@
+{% extends "web_app_base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="" style="display:block; width: 70%; margin: auto;">
+        <div class="panel" id="spy2">
+            <br>
+            <div class="panel-body pn">
+
+                <button class="btn-exceltable">REPORT</button>
+                <br><br>
+                <div class="exceltable">
+                    <table class="table footable" data-filter="#fooFilter">
+                        <thead>
+                        <tr>
+                            <th colspan="2" class="text-center">Comparison of effectiveness between
+                                periods {{ previous_year_start }}
+                                - {{ previous_date }} and {{ current_year_start }} - {{ current_date }}
+                            </th>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <th>{{ previous_year_start.year }}</th>
+                            <th>{{ current_year_start.year }}</th>
+                        </tr>
+                        </thead>
+                        <tr>
+                            <td>Spare parts</td>
+                            <td>{{ spare_parts_previous_sum|floatformat }} $</td>
+                            <td>{{ spare_parts_current_sum|floatformat }} $</td>
+                        </tr>
+                        <tr>
+                            <td>Workload</td>
+                            <td>{{ workload_previous_sum|floatformat }} hours</td>
+                            <td>{{ workload_current_sum|floatformat }} hours</td>
+                        </tr>
+                    </table>
+                    <br><br>
+                    <table class="table footable" data-filter="#fooFilter">
+                        <thead>
+                        <tr>
+                            <th colspan="2" class="text-center">
+                                Operational cost of spare parts ({{ previous_year_start.year }})
+                            </th>
+                        </tr>
+                        <tr>
+                            <th style="width: 50%">Date</th>
+                            <th>Amount, $</th>
+                        </tr>
+                        </thead>
+                        {% for sp in spare_parts_previous %}
+                            <tr>
+                                <td>{{ sp.created_at }}</td>
+                                <td>{{ sp.amount|floatformat }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                    <br><br>
+                    <table class="table footable" data-filter="#fooFilter">
+                        <thead>
+                        <tr>
+                            <th colspan="2" class="text-center">
+                                Operational cost of spare parts ({{ current_year_start.year }})
+                            </th>
+                        </tr>
+                        <tr>
+                            <th style="width: 50%">Date</th>
+                            <th>Amount, $</th>
+                        </tr>
+                        </thead>
+                        {% for sp in spare_parts_current %}
+                            <tr>
+                                <td>{{ sp.created_at }}</td>
+                                <td>{{ sp.amount|floatformat }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                    <br><br>
+                    <table class="table footable" data-filter="#fooFilter">
+                        <thead>
+                        <tr>
+                            <th colspan="2" class="text-center">
+                                Operational cost workloads ({{ previous_year_start.year }})
+                            </th>
+                        </tr> 
+                        <tr>
+                            <th>Date</th>
+                            <th>Amount, hours</th>
+                        </tr>
+                        </thead>
+                        {% for wl in workload_previous %}
+                            <tr>
+                                <td style="width: 50%">{{ wl.created_at }}</td>
+                                <td>{{ wl.amount|floatformat }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                    <br><br>
+                    <table class="table footable" data-filter="#fooFilter">
+                        <thead>
+                        <tr>
+                            <th colspan="2" class="text-center">
+                                Operational cost workloads ({{ current_year_start.year }})
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>Date</th>
+                            <th>Amount, hours</th>
+                        </tr>
+                        </thead>
+                        {% for wl in workload_current %}
+                            <tr>
+                                <td style="width: 50%">{{ wl.created_at }}</td>
+                                <td>{{ wl.amount|floatformat }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+

@@ -1,0 +1,54 @@
+{% block styles %}
+<style>
+    @keyframes blink {
+        from {
+            opacity: 1;
+        }
+        to {
+            opacity: 0.2;
+        }
+    }
+
+    .login-link {
+        color: white;
+        font-size: 3rem;
+        font-weight: 300;
+        text-decoration: none;
+        opacity: 0.8;
+        -webkit-transition: 0.5s;
+        -o-transition: 0.5s;
+        transition: 0.5s;
+        animation: blink 1s linear infinite alternate;
+    }
+
+    .login-link:hover {
+        color: white;
+        text-decoration: none;
+        opacity: 0.3;
+    }
+
+</style>
+
+{% endblock styles %}
+
+<div class="auth-p" style="width: 100vw; height:85vh; background-color: #fea552">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+
+                <div style="margin-top: 30vh">
+
+                    <div class="text-white display-4">ERROR 401, sorry your are not authorized</div>
+                    <div class="pull-right">
+                        <a href="{% url 'login' %}" class="login-link">> Please login here</a>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+</div>

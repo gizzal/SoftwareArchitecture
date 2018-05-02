@@ -1,0 +1,289 @@
+{% extends "web_app_base.html" %}
+{% load static %}
+{% block styles %}
+    <!-- Plugin CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/plugins/c3charts/c3.min.css' %}">
+{% endblock styles %}
+{% block content %}
+
+    {% if user.is_authenticated %}
+
+        <img src="
+
+
+                {% if object.type == 'FOUR_WHEELER' %}{% static 'img/4wheeler.png' %}{% else %}{% static 'img/truck.png' %}{% endif %}"
+             width="60%" height="auto" style="margin: auto; display: block;
+    margin-left: auto;
+    margin-right: auto;">
+
+        {% for subassy in object.type.subsystem_set.all %}
+
+            <h2>{{ subassy }}</h2>
+
+            {% for sensor in subassy.sensor_set.all %}
+                <div class="panel" id="{{ sensor.slug }}">
+                    <div class="panel-heading">
+              <span class="panel-icon">
+                <i class="fa fa-pencil"></i>
+              </span>
+                        <span class="panel-title">{{ sensor.name }}</span>
+                    </div>
+                    <div class="panel-body bg-light dark">
+                        <div id="zoom-{{ sensor.slug }}" style="height: 370px; width: 100%;"></div>
+                    </div>
+                </div>
+            {% endfor %}
+
+        {% endfor %}
+
+
+
+        <!-- End: Main -->
+
+        <style>
+            /*chart demo styles*/
+            .c3 {
+            }
+
+            /* tick color */
+            .c3 .tick {
+                fill: #AAA;
+            }
+
+            /* axis color */
+            .c3 line,
+            .c3 path {
+                stroke: #BBB;
+            }
+
+            /*axis label color*/
+            .c3 .c3-axis-x-label,
+            .c3 .c3-axis-y-label {
+                fill: #AAA;
+            }
+
+            /*legend label text color*/
+            .c3-legend-item {
+                fill: #888;
+                font-size: 14px;
+            }
+        </style>
+
+    {% endif %}
+
+{% endblock content %}
+{% block scripts %}
+
+    <!-- Page Plugins -->
+    <script src="{% static 'vendor/plugins/c3charts/d3.min.js' %}"></script>
+    <script src="{% static 'vendor/plugins/c3charts/c3.min.js' %}"></script>
+
+    <!-- Page Javascript -->
+     <script src="{% static 'assets/js/demo/charts/d3.js' %}"></script>
+
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+
+
+            // This page contains more Initilization Javascript than normal.
+            // As a result it has its own js page. See charts.js for more info
+            D3Charts.init();
+
+
+        });
+    </script>
+
+    <!--<script>-->
+        <!--/* All functions in this file are used only for charts.html */-->
+        <!--var D3Charts = function () {-->
+
+            <!--// Init Flot Chart Plugins-->
+            <!--var runD3Plugins = function () {-->
+
+                <!--// Plugin 1-->
+
+            <!--}-->
+
+            <!--// Init Flot Charts Plugin-->
+            <!--var runD3Charts = function () {-->
+
+                <!--// Add a series of colors to be used in the charts and pie graphs-->
+                <!--var Colors = [bgPrimary, bgInfo, bgWarning, bgAlert, bgDanger, bgSystem, bgSuccess,];-->
+                <!--var values = ['t'].concat(-->
+                    <!--document.getElementById('zoom-chart1').dataset.values.split(',')-->
+                <!--);-->
+                <!--console.log(values);-->
+
+
+                <!--// MouseWheel Zoom-->
+                <!--var chart9 = c3.generate({-->
+                    <!--bindto: '#zoom-chart1',-->
+                    <!--color: {-->
+                        <!--pattern: Colors,-->
+                    <!--},-->
+                    <!--padding: {-->
+                        <!--left: 30,-->
+                        <!--right: 15,-->
+                        <!--top: 0,-->
+                        <!--bottom: 0,-->
+                    <!--},-->
+                    <!--data: {-->
+                        <!--columns: [-->
+                            <!--values-->
+                        <!--]-->
+                    <!--},-->
+                    <!--zoom: {-->
+                        <!--enabled: true-->
+                    <!--}-->
+                <!--});-->
+
+
+                <!--var chart1 = c3.generate({-->
+                    <!--bindto: '#zoom-chart2',-->
+                    <!--color: {-->
+                        <!--pattern: Colors,-->
+                    <!--},-->
+                    <!--padding: {-->
+                        <!--left: 30,-->
+                        <!--right: 15,-->
+                        <!--top: 0,-->
+                        <!--bottom: 0,-->
+                    <!--},-->
+                    <!--data: {-->
+                        <!--columns: [-->
+                            <!--['t*', 30, 45, 40, 50, 50, 55, 50, 90, 60, 67, 70, 71, 100, 90, 80, 90, 100, 110, 100, 120, 125, 130, 135, 130, 140, 140, 145, 150, 150, 160, 155, 150, 160, 150, 160, 170, 177, 180, 190, 200, 205, 210, 220, 220, 230, 240, 245, 260, 270, 290, 300, 300, 290, 300]-->
+                        <!--]-->
+                    <!--},-->
+                    <!--zoom: {-->
+                        <!--enabled: true-->
+                    <!--}-->
+                <!--});-->
+
+                <!--var chart2 = c3.generate({-->
+                    <!--bindto: '#zoom-chart3',-->
+                    <!--color: {-->
+                        <!--pattern: Colors,-->
+                    <!--},-->
+                    <!--padding: {-->
+                        <!--left: 30,-->
+                        <!--right: 15,-->
+                        <!--top: 0,-->
+                        <!--bottom: 0,-->
+                    <!--},-->
+                    <!--data: {-->
+                        <!--columns: [-->
+                            <!--['t*', 300, 450, 400, 50, 50, 55, 500, 90, 60, 67, 70, 710, 100, 900, 80, 900, 100, 110, 100, 120, 125, 130, 135, 130, 140, 140, 145, 150, 150, 160, 155, 150, 160, 150, 160, 170, 177, 1800, 1900, 2000, 2050, 210, 220, 2020, 230, 240, 245, 2060, 270, 290, 300, 300, 290, 300]-->
+                        <!--]-->
+                    <!--},-->
+                    <!--zoom: {-->
+                        <!--enabled: true-->
+                    <!--}-->
+                <!--});-->
+
+
+                <!--// Donut Chart-->
+                <!--var chart10 = c3.generate({-->
+                    <!--bindto: '#donut-chart',-->
+                    <!--color: {-->
+                        <!--pattern: Colors,-->
+                    <!--},-->
+                    <!--data: {-->
+                        <!--columns: [-->
+                            <!--['data1', 10],-->
+                            <!--['data2', 120],-->
+                        <!--],-->
+                        <!--type: 'donut',-->
+                        <!--onclick: function (d, i) {-->
+                            <!--console.log("onclick", d, i);-->
+                        <!--},-->
+                        <!--onmouseover: function (d, i) {-->
+                            <!--console.log("onmouseover", d, i);-->
+                        <!--},-->
+                        <!--onmouseout: function (d, i) {-->
+                            <!--console.log("onmouseout", d, i);-->
+                        <!--}-->
+                    <!--},-->
+                    <!--donut: {-->
+                        <!--title: "The overall 111"-->
+                    <!--}-->
+                <!--});-->
+
+            <!--};-->
+            <!--return {-->
+                <!--init: function () {-->
+                    <!--runD3Plugins();-->
+                    <!--runD3Charts();-->
+                <!--}-->
+            <!--};-->
+        <!--}();-->
+    <!--</script>-->
+
+<!--NEW-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js" type="text/javascript"></script>
+    <!--NEW-->
+
+<script src="https://js.pusher.com/4.1/pusher.min.js"></script>
+  <script>
+
+    // Enable pusher logging - don't include this in production
+    Pusher.logToConsole = true;
+
+    var pusher = new Pusher('8f75fc68fa3883846a46', {
+      cluster: 'eu',
+      encrypted: true
+    });
+
+    var channel = pusher.subscribe('my-channel');
+    channel.bind('my-event', function(data) {
+      alert(data.message);
+    });
+
+
+//<!--SOME LOGICAL DIVIDER-->
+
+       // some sample json to graph processor
+       function get_params(some_object){
+
+       }
+
+
+
+
+      // Create a client instance
+        client = new Paho.MQTT.Client("mqtt-broker.ru", 8083, "clientId");
+
+        // set callback handlers
+        client.onConnectionLost = onConnectionLost;
+        client.onMessageArrived = onMessageArrived;
+
+        // connect the client
+        client.connect({onSuccess: onConnect});
+
+
+        // called when the client connects
+        function onConnect() {
+            // Once a connection has been made, make a subscription and send a message.
+            console.log("onConnect");
+            client.subscribe("test");
+        }
+
+        // called when the client loses its connection
+        function onConnectionLost(responseObject) {
+            if (responseObject.errorCode !== 0) {
+                console.log("onConnectionLost:" + responseObject.errorMessage);
+            }
+        }
+
+        // called when a message arrives
+        function onMessageArrived(message) {
+            console.log("onMessageArrived:" + message.payloadString);
+            obj = JSON.parse(message.payloadString);
+            console.log(obj);
+        }
+
+</script>
+
+{% endblock scripts %}
+{% block title %}
+    <title>Optimus - Vehicle Data</title>
+{% endblock title %}

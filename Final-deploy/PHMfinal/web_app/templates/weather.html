@@ -1,0 +1,19 @@
+{% extends "web_app_base.html" %}
+{% load static %}
+{% block content %}
+
+<h2>Weather</h2>
+<div>Wind speed: {{ weather.wind_speed }}</div>
+<div>Humidity: {{ weather.humidity }}</div>
+<div>Temperature: {{ weather.temperature }}</div>
+<div>Pressure: {{ weather.pressure }}</div>
+
+{% endblock content %}
+
+{% block scripts %}
+
+{% endblock scripts %}
+
+{% block title %}
+    <title>Optimus - Weather</title>
+{% endblock title %}

@@ -1,0 +1,114 @@
+{% extends "web_app_base.html" %}
+{% load static %} 
+{% block content %} 
+{% if user.is_authenticated %}
+<!-- begin: .tray-center -->
+<!--        We erase this tray tray-center because it makes the height not working properly-->
+<!--
+                <div class="tray tray-center"
+                     style="display:block; width: 70%; margin: auto;">
+        -->
+
+<style>
+    .search-martlet {
+        background-color: white;
+        border-radius: 5px;
+    }
+
+    .search-martlet:active {
+        background-color: white;
+    }
+
+    .search-martlet:focus {
+        background-color: white;
+    }
+
+    .search-martlet::-webkit-input-placeholder {
+        color: dimgray;
+    }
+
+</style>
+
+<div class="" style="display:block; width: 70%; margin: auto;">
+
+    <!-- create new order panel -->
+
+    <!-- Panel with: Data Filter -->
+    <div class="panel" id="spy2">
+
+        <div class="panel-menu">
+            <input id="fooFilter" type="text" class="form-control search-martlet" placeholder="Type your mission name here...">
+        </div>
+        <div class="panel-body pn">
+            <div id="bars">
+            </div>
+            <table class="table footable" data-filter="#fooFilter">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Arrival point</th>
+                        <th>Departure point</th>
+                        <th>Started at</th>
+                        <th>Ended_at</th>
+                        <th>State</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{ listItemPattern }} {% for mission in object_list %}
+                    <tr>
+                        <td>
+                              
+                                
+                                 {% if mission.status == 'Finished' %}
+                                         <a href="{% url 'finished' mission.id %}">
+                                {{ mission.name }}</a>
+                                {% elif mission.status == 'Planned' %}
+                                       <a href="{% url 'planning' mission.id %}">
+                                {{ mission.name }}</a>
+                                {% elif mission.status == 'Active' %}
+                                       <a href="{% url 'mission' mission.id %}">
+                                {{ mission.name }}</a>
+                                {% endif %}
+                                
+                                
+                                
+                                </td>
+                            <td>{{ mission.arrival_point }}</td>
+                            <td>{{ mission.departure_point }}</td>
+                            <td>{{ mission.started_at }}</td>
+                            <td>{{ mission.ended_at }}</td>
+                            <td>
+                                {% if mission.status == 'Finished' %}
+                                    <span style="color: #0f0">{{ mission.status }}</span>
+                                {% elif mission.status == 'Planned' %}
+                                    <span style="color: #304ffe">{{ mission.status }}</span>
+                                {% elif mission.status == 'Active' %}
+                                    <span style="color: #fe1610">{{ mission.status }}</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    {% else %}
+
+    
+   {% include "login_auth.html" %}
+    
+  
+   
+    {% endif %} 
+    {% endblock content %} 
+    {% block title %}
+    <title>Optimus - missions</title>
+    {% endblock title %}
+
+    <script>
+
+
+    </script>

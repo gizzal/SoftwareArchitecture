@@ -1,0 +1,43 @@
+{% extends "web_app_base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="" style="display:block; width: 70%; margin: auto;">
+        <div class="panel" id="spy2">
+            <div class="panel-body pn">
+                <br>
+                <table class="table footable" data-filter="#fooFilter">
+                    <thead>
+                    <tr>
+                        <th colspan="4" class="text-center">
+                            Vehicle repairing analysis</th>
+                    <tr>
+                        <th style="width: 50%">Name</th>
+                        <th>Total distance</th>
+                        <th>Warnings in</th>
+                        <th>To repair</th>
+                    </tr>
+                    </thead>
+                    {% for vehicle in vehicle_list %}
+                        <tr>
+                            <td><a href="{% url 'repairment_detailed' vehicle.id %}">{{ vehicle.name }}</a
+                            ></td>
+                            <td>{{ vehicle.mission.distance }}</td>
+                            <td>
+                                {% if vehicle.last_mission_point %}
+                                {{ vehicle.last_mission_point.warning_sensor_list }}
+                                    {% else %}
+                                    -
+                                {% endif %}
+                        </td>
+                            <td>
+                                <input type="checkbox" name="" id="">
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+

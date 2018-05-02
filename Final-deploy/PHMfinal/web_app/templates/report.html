@@ -1,0 +1,75 @@
+{% extends "web_app_base.html" %}
+{% load static %}
+{% load assign %}
+{% block content %}
+
+    {% if user.is_authenticated %}
+
+
+        <div class="" style="display:block; width: 70%; margin: auto;">
+        <div class="panel" id="spy2">
+            <div class="panel-body pn">
+                <div id="bars">
+                    <div class="bar2">
+                        {% if object.is_past %}
+                            <button><a href="
+{% url 'mission_report' object.id %}">Print
+                                report</a></button>
+                        {% endif %}
+                    </div>
+                </div>
+                {% if object.is_past %}
+                    <table class="table footable" data-filter="#fooFilter">
+                        <thead>
+                        <tr>
+                            <th>Vehicle</th>
+                            <th>Distance</th>
+                            <th>Average speed</th>
+                            <th>Fuel spend</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% assign i 0 %}
+                        {% for vehicle in object_list %}
+                            <tr>
+                                <td>
+                                    <a href="{% url 'vehicle' vehicle.id %}">{{ vehicle.name }}</a>
+                                </td>
+                                <td>{{ object.distance }}</td>
+                                <td>
+                                    {% if i == 0 %} 70
+                                    {% else %} 74
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if i == 0 %} 240,3
+                                    {% else %} 300,7
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% assign i 1 %}
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <div class="bars">
+                        <p style="text-align: center;">Mission is not completed
+                            yet :(</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+
+    {% else %}
+
+        {% include "login_auth.html" %}
+
+    {% endif %}
+
+{% endblock content %}
+{% block title %}
+    <title>Optimus - dashboard</title>
+{% endblock title %}
+
+

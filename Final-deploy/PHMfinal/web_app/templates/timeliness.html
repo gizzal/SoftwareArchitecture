@@ -1,0 +1,50 @@
+{% extends "web_app_base.html" %}
+{% load static %}
+
+{% block content %}
+
+    <div class="" style="display:block; width: 70%; margin: auto;">
+        <div class="panel" id="spy2">
+            <div class="panel-body pn">
+            <br>
+            <button class="btn-exceltable">REPORT</button>
+                <br><br>
+                <table class="table footable exceltable"
+                                           data-filter="#fooFilter">
+                    <thead>
+                    <tr>
+                        <th colspan="6" class="text-center">Missions timeliness
+                            analysis</th>
+                    </tr>
+                    <tr>
+                        <th>Mission</th>
+                        <th>Started</th>
+                        <th>Planned Finish</th>
+                        <th>Actual Finish</th>
+                        <th>Delay Absolute (hours)</th>
+                        <th>Delay Percentage (%)</th>
+                    </tr>
+                    </thead>
+                    {% for mission in missions_list %}
+                        <tr>
+                            <td>{{ mission.name }}</td>
+                            <td>{{ mission.started_at }}</td>
+                            <td>{{ mission.ended_at }}</td>
+                            <td>{{ mission.actual_end_at }}</td>
+                            <td>{{ mission.delay_abs }}</td>
+                            <td>{{ mission.delay_percentage }}</td>
+                        </tr>
+                    {% endfor %}
+                    <tr>
+                        <td><b>Total</b></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>{{ delay_sum }}</td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

@@ -1,0 +1,352 @@
+{% extends "web_app_additional.html" %}
+
+{% block title %}
+<title>Optimus - Vehicle Data</title>
+{% endblock title %} 
+
+<!--Loading static library if needed-->
+{% load static %} 
+
+
+<!--Here we start with the content of the page-->
+{% block content %} 
+
+<!--Here we implemented security-->
+{% if user.is_authenticated %}
+<img src="{% static 'svg/truck-6.svg' %}" alt="">
+{% for subassy in object.type.subsystem_set.all %}
+<h2>{{ subassy }}</h2>
+<table id="appendable" style="width: 80%; margin: auto;">
+    <tr>
+        {% for sensor in subassy.sensor_set.all|slice:":3" %}
+        <td>
+            <div class="panel" id="{{ sensor.slug }}" >
+                <div class="panel-heading" style="display: block;">
+                    <span class="panel-icon">
+                <i class="fa fa-area-chart"></i>
+              </span>
+                    <span class="panel-title">{{ sensor.name }}</span>
+                </div>
+                <div class="panel-body bg-light dark" style="display: block;">
+                    <div id="zoom-{{ sensor.slug }}" style='height: 370px; width: 370px;'></div>
+                </div>
+            </div>
+        </td>
+        {% endfor %}
+    </tr>
+<tr>
+        {% for sensor in subassy.sensor_set.all|slice:"3:6" %}
+        <td>
+            <div class="panel" id="{{ sensor.slug }}">
+                <div class="panel-heading">
+                    <span class="panel-icon">
+                <i class="fa fa-area-chart"></i>
+              </span>
+                    <span class="panel-title">{{ sensor.name }}</span>
+                </div>
+                <div class="panel-body bg-light dark">
+                    <div id="zoom-{{ sensor.slug }}" style='height: 370px; width: 370px;'></div>
+                </div>
+            </div>
+        </td>
+        {% endfor %}
+    </tr>
+<tr>
+        {% for sensor in subassy.sensor_set.all|slice:"6:9" %}
+        <td >
+            <div class="panel" id="{{ sensor.slug }}">
+                <div class="panel-heading">
+                    <span class="panel-icon">
+                <i class="fa fa-area-chart"></i>
+              </span>
+                    <span class="panel-title">{{ sensor.name }}</span>
+                </div>
+                <div class="panel-body bg-light dark" style="display: block;">
+                    <div id="zoom-{{ sensor.slug }}" style='height: 370px; width: 370px;'></div>
+                </div>
+            </div>
+        </td>
+        {% endfor %}
+    </tr>
+</table>
+
+{% endfor %} 
+{% endif %} 
+
+{% endblock content %} 
+{% block scripts %}
+<!--GETTING CONFIGURATION FOR BROCKER-->
+
+
+
+<!-- Page Plugins -->
+<script src="{% static 'vendor/plugins/c3charts/d3.min.js' %}"></script>
+<script src="{% static 'vendor/plugins/c3charts/c3.min.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js" type="text/javascript"></script>
+<!-- Page Javascript -->
+<script src="{% static 'assets/js/demo/charts/d3.js' %}"></script>
+
+<!--<script type="text/javascript">-->
+<!--jQuery(document).ready(function () {-->
+
+
+<!--// This page contains more Initilization Javascript than normal.-->
+<!--// As a result it has its own js page. See charts.js for more info-->
+<!--//D3Charts.init();-->
+
+
+<!--});-->
+<!--</script>-->
+
+
+<script>
+
+    var myhost = "localhost:8000"; // 35.187.119.223
+    var mytoken = "866a2ca0a8c37c4eb15169ec8853c7d6b0dbbe52";
+    // var MQTT_Config = {};
+
+    function write_to_config(response_config) {
+        var MQTT_config = JSON.parse(response_config);
+        console.log(MQTT_config["broker_ip"], parseInt(MQTT_config["broker_ws_port"]));
+        MQTTconnect(MQTT_config["broker_ip"], parseInt(MQTT_config["broker_ws_port"]));
+    }
+
+    function httpGetAsync(theUrl, callback) {
+        var xmlHttp = new XMLHttpRequest();
+
+        xmlHttp.onreadystatechange = function() {
+            console.log(xmlHttp);
+            if ((xmlHttp.readyState == 4 && xmlHttp.status == 200)) {
+                callback(xmlHttp.responseText);
+            }
+        }
+        xmlHttp.open("GET", theUrl, true, 'frontend', 'frontend');
+        xmlHttp.setRequestHeader('Accept', 'application/json');
+        xmlHttp.setRequestHeader('Authorization', 'Token ' + mytoken);
+        xmlHttp.send(null);
+    }
+
+
+
+
+
+
+    var BigObject = {};
+
+    /* All functions in this file are used only for charts.html */
+    var D3Charts = function() {
+
+        var runD3Plugins = function() {
+
+        }
+
+        // Init Flot Charts Plugin
+        var runD3Charts = function() {
+
+            {% for subassy in object.type.subsystem_set.all %}
+                {% for sensor in subassy.sensor_set.all %}
+
+            // Add a series of colors to be used in the charts and pie graphs
+            var Colors = [bgPrimary, bgInfo, bgWarning, bgAlert, bgDanger, bgSystem, bgSuccess, ];
+            <!--var values = ['t'].concat(-->
+            <!--document.getElementById('zoom-{{ sensor.slug }}').dataset.values.split(',')-->
+            <!--);-->
+            <!--console.log("values");-->
+            <!--console.log(values);-->
+
+            //console.log("{{ sensor.slug }}");
+            //console.log(BigObject["{{ sensor.slug }}"]);
+            // MouseWheel Zoom
+
+            try {
+                var chart9 = c3.generate({
+                    bindto: '#zoom-{{ sensor.slug }}',
+                    color: {
+                        pattern: Colors,
+                    },
+                    padding: {
+                        left: 30,
+                        right: 15,
+                        top: 0,
+                        bottom: 0,
+                    },
+                    data: {
+                        columns: [
+                            ["UNIT"].concat(BigObject["{{ sensor.slug }}"])
+                        ]
+                    },
+                    zoom: {
+                        enabled: true
+                    }
+                });
+            } catch (error) {
+
+                // console.error(error);
+                console.log("!!!!!!!!!!!!!!!!!!!!!!!! {{ sensor.slug }} UNAVAILABLE");
+                console.log(BigObject);
+                document.getElementById('{{ sensor.slug }}').style.display = "none";
+            }
+
+            {% endfor %}
+            {% endfor %}
+
+
+            // Donut Chart
+            var chart10 = c3.generate({
+                bindto: '#donut-chart',
+                color: {
+                    pattern: Colors,
+                },
+                data: {
+                    columns: [
+                        ['data1', 10],
+                        ['data2', 120],
+                    ],
+                    type: 'donut',
+                    onclick: function(d, i) {
+                        console.log("onclick", d, i);
+                    },
+                    onmouseover: function(d, i) {
+                        console.log("onmouseover", d, i);
+                    },
+                    onmouseout: function(d, i) {
+                        console.log("onmouseout", d, i);
+                    }
+                },
+                donut: {
+                    title: "The overall 111"
+                }
+            });
+
+        };
+        return {
+            init: function() {
+                runD3Plugins();
+                runD3Charts();
+            }
+        };
+    }();
+
+
+    //<!--SOME LOGICAL DIVIDER-->
+    var slice_val = 16;
+    // some sample json to graph processor
+    //SpeedObject.push()
+    function get_params(some_object) {
+
+
+        for (var i = 0; i < some_object["sensors"].length; ++i) {
+            var slug = some_object["sensors"][i]["slug"];
+            console.log(i);
+            if (isEmpty(BigObject)) {
+                BigObject[slug] = [];
+            }
+
+            if (!BigObject.hasOwnProperty(slug)) {
+                BigObject[slug] = [];
+            }
+            var current_val = parseFloat(some_object["sensors"][i]["value"]);
+            if (isNaN(current_val))
+                current_val = 0;
+
+            BigObject[slug].push(current_val);
+            console.log(BigObject);
+            if (BigObject[slug].length > slice_val) {
+                BigObject[slug] = BigObject[slug].slice(-slice_val);
+            }
+
+        }
+    }
+
+    function isEmpty(obj) {
+        for (var prop in obj) {
+            if (obj.hasOwnProperty(prop))
+                return false;
+        }
+
+        return JSON.stringify(obj) === JSON.stringify({});
+    }
+
+    function table_appender(json_object) {
+        var table = document.getElementById("appendable");
+        var table_row = 0;
+        var row = table.insertRow(table_row);
+
+
+        var current_cell = 0;
+        var table_content = "";
+        var cell = row.insertCell(current_cell);
+
+        for (var key in json_object["sensors"]) {
+            if (json_object["sensors"].hasOwnProperty(key)) {
+                console.log(key + " -> " + json_object["sensors"][key]);
+                table_content = "<div class='panel' id='";
+                table_content += key; //some_id_named_after
+                table_content += "'><div class='panel-heading'><span class='panel-icon'><i class='fa fa-area-chart'></i></span><span class='panel-title'>";
+                table_content += key; //some_title
+                table_content += "</span></div><div class='panel-body bg-light dark'><div id='";
+                table_content += key; //some_id
+                table_content += "' style='height: 370px; width: 100%;'></div></div></div>";
+                if (current_cell >= 1) {
+                    current_cell = 0;
+                    table_row += 1;
+                    row = table.insertRow(table_row);
+                } else {
+                    current_cell += 1;
+                }
+                cell = row.insertCell(current_cell);
+                cell.innerHTML = table_content;
+            }
+        }
+    }
+        //MQQT starts here
+        var clientid = "iot-" + ("" + Math.random()).substring(2);
+
+        // Create a client instance
+        function MQTTconnect(qhost, qport) {
+            // Create a client instance
+            console.log("Connection settings ::::::", qhost, qport);
+
+            client = new Paho.MQTT.Client(qhost, Number(qport), clientid);
+
+            // set callback handlers
+            client.onConnectionLost = onConnectionLost;
+            client.onMessageArrived = onMessageArrived;
+
+            // connect the client
+            client.connect({
+                onSuccess: onConnect
+            });
+        }
+
+        // called when the client connects
+        function onConnect() {
+            // Once a connection has been made, make a subscription and send a message.
+            console.log("onConnect");
+            client.subscribe("test");
+        }
+
+        // called when the client loses its connection
+        function onConnectionLost(responseObject) {
+            if (responseObject.errorCode !== 0) {
+                console.log("onConnectionLost:" + responseObject.errorMessage);
+
+            }
+            setTimeout(httpGetAsync("http://" + myhost + "/api/config/", write_to_config), 2000);
+        }
+
+        // called when a message arrives
+        function onMessageArrived(message) {
+            console.log("onMessageArrived:" + message.payloadString);
+            var obj = JSON.parse(message.payloadString);
+            console.log(obj);
+            get_params(obj);
+            D3Charts.init();
+        }
+
+
+        httpGetAsync("http://" + myhost + "/api/config/", write_to_config);
+</script>
+
+
+{% endblock scripts %}

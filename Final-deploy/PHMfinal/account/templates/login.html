@@ -1,0 +1,69 @@
+{% extends "login_base.html" %}
+{% load static %}
+{% block content %}
+
+            <div class="admin-form theme-info mw500" id="login" style="margin-top: -0px; background-attachment: fixed;" >
+                <img src="{% static 'img/logo_optimus.png' %}">
+                <!--  -->
+                <div class="row table-layout"  style="background-attachment:fixed;">
+                    <h1 style="max-width: 275px;">Mission Prognostic System - Login</h1>
+                </div>
+                <br>
+                <div class="row mb15 table-layout mt10">
+                    <div class="col-xs-12 text-right">
+                        <div class="login-links" style="text-align: right">
+                            <a href="{% url 'register' %}" class="active" style="color: #304FFE;" title="Register">Register</a>
+                            <span class="text-black"> | </span>
+                            <a href="#" class="" style="color: #FFA726;" title="Register">Forgot Password?</a>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Login Panel/Form -->
+                <div class="panel mt10 mb25">
+
+                    <form id="login-form" name="login-form" method="POST" class="text-left">
+                        {% csrf_token %}
+
+                        <div class="panel-body bg-light p25 pb15">
+
+                            <!--error-->
+                            {% for error in errors %}
+                                <p style="color:red;">{{ error }}</p>
+                            {% endfor %}
+
+                            <!-- Username Input -->
+                            <div class="section">
+                                {{ form.login.error_messages }}
+                                <label for="{{ form.login.id_for_label }}" class="field-label mb5">Username</label>
+                                <label for="{{ form.login.id_for_label }}" class="field prepend-icon">
+                                    {{ form.login }}
+                                </label>
+                            </div>
+
+                            <!-- Password Input -->
+                            <div class="section">
+                                {{ form.password.error_messages }}
+                                <label for="{{ form.password.id_for_label }}" class="field-label mb5">Password</label>
+                                <label for="{{ form.password.id_for_label }}" class="field prepend-icon">
+                                    {{ form.password }}
+                                </label>
+                            </div>
+
+                            <div class="checkbox-custom checkbox-custom--1 mb10">
+                                <input type="checkbox" id="remember" name="remember">
+                                <label for="remember">Remember me</label>
+                            </div>
+
+                        </div>
+
+                        <div class="clearfix">
+                            <button type="submit" class="button btn-primary login-btn">Enter</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+
+{% endblock content %}

@@ -1,0 +1,8 @@
+pipelines:
+  branches:
+    staging:
+      - step:
+          name: Deploy to staging
+          deployment: staging
+          script:
+            - sh ./deploy.sh

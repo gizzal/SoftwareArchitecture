@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Meta, title, CSS, favicons, etc. -->
+  <meta charset="utf-8">
+  <title>Optimus - dashboard</title>
+  <meta name="keywords" content="HTML5 Bootstrap 3 Admin Template UI Theme" />
+  <meta name="description" content="MonsterDashboard - A Responsive HTML5 Admin UI Framework">
+  <meta name="author" content="MonsterDashboard">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Font CSS (Via CDN) -->
+  <link href='//fonts.googleapis.com/css?family=Fira+Sans:700,400,500,300' rel='stylesheet' type='text/css'>
+  <!-- Stateface CSS(font) -->
+  <link rel="stylesheet" type="text/css" href="assets/fonts/stateface/stateface.css">
+  <!-- Theme CSS -->
+  <link rel="stylesheet" type="text/css" href="assets/skin/default_skin/css/theme.css">
+  <!-- Admin Forms CSS -->
+  <link rel="stylesheet" type="text/css" href="assets/admin-tools/admin-forms/css/admin-forms.min.css">
+
+  <link rel="stylesheet" type="text/css" href="bars.css">
+  <link href = "img/logo_optimus.png" rel="icon" type="image/gif">
+
+</head>
+<body style="background-attachment:fixed; background-size: cover; height: 100%">
+  <section id="content_wrapper" style="display:block; margin-left: 0px;">
+  <section id="content" class="table-layout animated fadeIn" style="display:block;">
+          <!-- begin: .tray-center -->
+        <div class="tray tray-center" style="display:block; width: 70%; margin: auto;">
+
+          <!-- create new order panel -->
+
+ <!-- Panel with: Data Filter -->
+          <div class="panel" id="spy2">
+            <div class="panel-heading">
+              <span class="panel-title">
+                <span class="fa fa-search"></span>Dashboard</span>
+              <div class="pull-right">
+              </div>
+            </div>
+            <div class="panel-menu">
+              <input id="fooFilter" type="text" class="form-control" placeholder="Enter Table Filter Criteria Here...">
+            </div>
+            <div class="panel-body pn">
+                                        <div id="bars">
+  <div class="bar" data-percent="87">
+    <h4>Convoy total health</h4>
+    <canvas class="bar-circle" width="150" height="150"></canvas>
+  </div>
+</div>
+              <table class="table footable" data-filter="#fooFilter">
+                  <thead>
+                    <tr>
+                      <th>Health</th>
+                      <th>Vehicle Type</th>
+                      <th>Vehicle ID</th>
+                      <th>Break System</th>
+                      <th>Engine</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {{listItemPattern}}
+                    <tr>
+                      <td>90%</td>
+                      <td>4-wheeler</td>
+                      <td>A192JF24</td>
+                      <td><button type="button" class="btn btn-info br2 btn-xs fs12 dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> Normal</button></td>
+                      <td><button type="button" class="btn btn-danger br2 btn-xs fs12 dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> Critical</button></td>
+                    </tr>
+                    <tr>
+                      <td>56%</td>
+                      <td>Truck</td>
+                      <td>N874HG82</td>
+                      <td><button type="button" class="btn btn-danger br2 btn-xs fs12 dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> Critical</button></td>
+                      <td><button type="button" class="btn btn-danger br2 btn-xs fs12 dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> Critical</button></td>
+                    </tr>
+                    <tr>
+                      <td>99%</td>
+                      <td>Truck</td>
+                      <td>G859YT12</td>
+                      <td><button type="button" class="btn btn-info br2 btn-xs fs12 dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> Normal</button></td>
+                      <td><button type="button" class="btn btn-info br2 btn-xs fs12 dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> Normal</button></td>
+                    </tr>
+                    <tr>
+                      <td>87%</td>
+                      <td>4-Wheeler</td>
+                      <td>M090SL01</td>
+                      <td><button type="button" class="btn btn-warning br2 btn-xs fs12 dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> Dangerous</button></td>
+                      <td><button type="button" class="btn btn-info br2 btn-xs fs12 dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> Normal</button></td>
+                    </tr>
+                    <tr>
+                      <td>88%</td>
+                      <td>Truck</td>
+                      <td>T939RT25</td>
+                      <td><button type="button" class="btn btn-warning br2 btn-xs fs12 dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> Dangerous</button></td>
+                      <td><button type="button" class="btn btn-warning br2 btn-xs fs12 dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> Dangerous</button></td>
+                    </tr>
+                  </tbody>
+                </table>
+            </div>
+          </div>
+      </section>
+    </section>
+
+
+<script src="bars.js"></script>
+     <!-- jQuery -->
+  <script src="vendor/jquery/jquery-1.11.1.min.js"></script>
+  <script src="vendor/jquery/jquery_ui/jquery-ui.min.js"></script>
+
+  <!-- FooTable Plugin -->
+  <script src="vendor/plugins/footable/js/footable.all.min.js"></script>
+
+
+  <!-- FooTable Addon -->
+  <script src="vendor/plugins/footable/js/footable.filter.min.js"></script>
+
+  <!-- Theme Javascript -->
+  <script src="assets/js/utility/utility.js"></script>
+  <script src="assets/js/demo/demo.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script type="text/javascript">
+  jQuery(document).ready(function() {
+
+    "use strict";
+
+    // Init Theme Core    
+    Core.init();
+
+    // Init Demo JS  
+    Demo.init();
+
+
+    // Init FooTable Examples
+    $('.footable').footable();
+
+
+  });
+  </script>
+  <!-- END: PAGE SCRIPTS -->
+</body>

@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>truck</title>
+
+
+    <!--    bootstrap 4-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!--    Fontawesome-->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
+
+
+</head>
+
+<body>
+
+
+    <img src="truck-6.svg" alt="" data-toggle="modal" data-target=".bd-example-modal-lg">
+
+
+
+
+
+
+
+    <!--   <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Large modal</button>-->
+
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title display-4">Truck prognosis</h2>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="container">
+
+
+                        <div style="background-color:#3061b5;padding: 0.2rem 1rem; margin: 1rem 0rem" class="text-white">
+                            <h2 class="" style="font-weight:300">Current Diagnosis</h2>
+                        </div>
+                        <section class="table-layout" style="display:block;">
+
+                            <h2>Engine</h2>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 15%"></div>
+                            </div>
+
+                            <table>
+                                <tr>
+
+                                    <td>
+                                        <div class="panel" id="timing-advance" style="display: block;">
+                                            <div class="panel-heading" style="display: block;">
+                                                <span class="panel-icon">
+                <i class="fas fa-chart-area"></i>
+              </span>
+                                                <span class="panel-title">Timing Advance</span>
+                                            </div>
+                                            <div class="panel-body bg-light dark" style="display: block;">
+                                                <div id="zoom-timing-advance" style="height: 100%; width: 100%;"></div>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <div class="panel" id="air-intake-temp" style="display: block;">
+                                            <div class="panel-heading" style="display: block;">
+                                                <span class="panel-icon">
+                <i class="fas fa-chart-area"></i>
+              </span>
+                                                <span class="panel-title">Air Intake Temp</span>
+                                            </div>
+                                            <div class="panel-body bg-light dark" style="display: block;">
+                                                <div id="zoom-air-intake-temp" style="height: 100%; width: 100%;"></div>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <div class="panel" id="engine-load" style="display: block;">
+                                            <div class="panel-heading" style="display: block;">
+                                                <span class="panel-icon">
+                <i class="fas fa-chart-area"></i>
+              </span>
+                                                <span class="panel-title">Engine Load</span>
+                                            </div>
+                                            <div class="panel-body bg-light dark" style="display: block;">
+                                                <div id="zoom-engine-load" style="height: 100%; width: 100%;"></div>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <div class="panel" id="engine-runtime" style="display: block;">
+                                            <div class="panel-heading" style="display: block;">
+                                                <span class="panel-icon">
+                <i class="fas fa-chart-area"></i>
+              </span>
+                                                <span class="panel-title">Engine Runtime</span>
+                                            </div>
+                                            <div class="panel-body bg-light dark" style="display: block;">
+                                                <div id="zoom-engine-runtime" style="height: 100%; width: 100%;"></div>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <div class="panel" id="intake-manifold-pressure" style="display: block;">
+                                            <div class="panel-heading" style="display: block;">
+                                                <span class="panel-icon">
+                <i class="fas fa-chart-area"></i>
+              </span>
+                                                <span class="panel-title">Intake Manifold Pressure</span>
+                                            </div>
+                                            <div class="panel-body bg-light dark" style="display: block;">
+                                                <div id="zoom-intake-manifold-pressure" style="height: 100%; width: 100%;"></div>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <div class="panel" id="maf" style="display: block;">
+                                            <div class="panel-heading" style="display: block;">
+                                                <span class="panel-icon">
+                <i class="fas fa-chart-area"></i>
+              </span>
+                                                <span class="panel-title">MAF</span>
+                                            </div>
+                                            <div class="panel-body bg-light dark" style="display: block;">
+                                                <div id="zoom-maf" style="height: 100%; width: 100%;"></div>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <div class="panel" id="engine-rpm" style="display: block;">
+                                            <div class="panel-heading" style="display: block;">
+                                                <span class="panel-icon">
+                <i class="fas fa-chart-area"></i>
+              </span>
+                                                <span class="panel-title">Engine RPM</span>
+                                            </div>
+                                            <div class="panel-body bg-light dark" style="display: block;">
+                                                <div id="zoom-engine-rpm" style="height: 100%; width: 100%;"></div>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                </tr>
+                            </table>
+
+
+
+
+                            <h2>General</h2>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 45%"></div>
+                            </div>
+                            <table>
+                                <tr>
+
+                                    <td>
+                                        <div class="panel" id="speed" style="display: block;">
+                                            <div class="panel-heading" style="display: block;">
+                                                <span class="panel-icon">
+                <i class="fas fa-chart-area"></i>
+              </span>
+                                                <span class="panel-title">Speed</span>
+                                            </div>
+                                            <div class="panel-body bg-light dark" style="display: block;">
+                                                <div id="zoom-speed" style="height: 100%; width: 100%;"></div>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <div class="panel" id="ambient-air-temp" style="display: block;">
+                                            <div class="panel-heading" style="display: block;">
+                                                <span class="panel-icon">
+                <i class="fas fa-chart-area"></i>
+              </span>
+                                                <span class="panel-title">Ambient Air Temp</span>
+                                            </div>
+                                            <div class="panel-body bg-light dark" style="display: block;">
+                                                <div id="zoom-ambient-air-temp" style="height: 100%; width: 100%;"></div>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <div class="panel" id="throttle-pos" style="display: block;">
+                                            <div class="panel-heading" style="display: block;">
+                                                <span class="panel-icon">
+                <i class="fas fa-chart-area"></i>
+              </span>
+                                                <span class="panel-title">Throttle Pos</span>
+                                            </div>
+                                            <div class="panel-body bg-light dark" style="display: block;">
+                                                <div id="zoom-throttle-pos" style="height: 100%; width: 100%;"></div>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <div class="panel" id="dtc-number" style="display: block;">
+                                            <div class="panel-heading" style="display: block;">
+                                                <span class="panel-icon">
+                <i class="fas fa-chart-area"></i>
+              </span>
+                                                <span class="panel-title">DTC Number</span>
+                                            </div>
+                                            <div class="panel-body bg-light dark" style="display: block;">
+                                                <div id="zoom-dtc-number" style="height: 100%; width: 100%;"></div>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <div class="panel" id="trouble-codes" style="display: block;">
+                                            <div class="panel-heading" style="display: block;">
+                                                <span class="panel-icon">
+                <i class="fas fa-chart-area"></i>
+              </span>
+                                                <span class="panel-title">Trouble Codes</span>
+                                            </div>
+                                            <div class="panel-body bg-light dark" style="display: block;">
+                                                <div id="zoom-trouble-codes" style="height: 100%; width: 100%;"></div>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <div class="panel" id="barometric-pressure" style="display: block;">
+                                            <div class="panel-heading" style="display: block;">
+                                                <span class="panel-icon">
+                <i class="fas fa-chart-area"></i>
+              </span>
+                                                <span class="panel-title">Barometric Pressure</span>
+                                            </div>
+                                            <div class="panel-body bg-light dark" style="display: block;">
+                                                <div id="zoom-barometric-pressure" style="height: 100%; width: 100%;"></div>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <div class="panel" id="equiv-ratio" style="display: block;">
+                                            <div class="panel-heading" style="display: block;">
+                                                <span class="panel-icon">
+                <i class="fas fa-chart-area"></i>
+              </span>
+                                                <span class="panel-title">Equiv Ratio</span>
+                                            </div>
+                                            <div class="panel-body bg-light dark" style="display: block;">
+                                                <div id="zoom-equiv-ratio" style="height: 100%; width: 100%;"></div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+
+
+
+
+                            <h2>Battery</h2>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 35%"></div>
+                            </div>
+                            <table>
+                                <tr>
+
+                                    <td>
+                                        <div class="panel" id="battery-voltage" style="display: block;">
+                                            <div class="panel-heading" style="display: block;">
+                                                <span class="panel-icon">
+                <i class="fas fa-chart-area"></i>
+              </span>
+                                                <span class="panel-title">Battery Voltage</span>
+                                            </div>
+                                            <div class="panel-body bg-light dark" style="display: block;">
+                                                <div id="zoom-battery-voltage" style="height: 100%; width: 100%;"></div>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                </tr>
+                            </table>
+
+
+
+
+                            <h2>Fuel</h2>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+                            </div>
+                            <table>
+                                <tr>
+
+                                    <td>
+                                        <div class="panel-heading" style="display: block;">
+                                            <span class="panel-icon">
+                <i class="fas fa-chart-area"></i>
+              </span>
+                                            <span class="panel-title">Fuel Economy</span>
+                                        </div>
+                                        <div class="panel-body bg-light dark" style="display: block;">
+                                            <div>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td>
+
+                                        <div class="panel-heading" style="display: block;">
+                                            <span class="panel-icon">
+                <i class="fas fa-chart-area"></i>
+              </span>
+                                            <span class="panel-title">Fuel Level</span>
+                                        </div>
+                                        <div class="panel-body bg-light dark" style="display: block;">
+                                            <div>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td>
+
+                                        <div class="panel-heading" style="display: block;">
+                                            <span class="panel-icon">
+                <i class="fas fa-chart-area"></i>
+              </span>
+                                            <span class="panel-title">Fuel Pressure</span>
+                                        </div>
+                                        <div class="panel-body bg-light dark" style="display: block;">
+                                            <div>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td>
+
+                                        <div class="panel-heading" style="display: block;">
+                                            <span class="panel-icon">
+                <i class="fas fa-chart-area"></i>
+              </span>
+                                            <span class="panel-title">Fuel Type</span>
+                                        </div>
+                                        <div class="panel-body bg-light dark" style="display: block;">
+                                            <div>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td>
+
+                                        <div class="panel-heading" style="display: block;">
+                                            <span class="panel-icon">
+                <i class="fas fa-chart-area"></i>
+              </span>
+                                            <span class="panel-title">Long Term Fuel Trim Bank 2</span>
+                                        </div>
+                                        <div class="panel-body bg-light dark" style="display: block;">
+
+                                        </div>
+                                    </td>
+
+                                    <td>
+
+                                        <div class="panel-heading" style="display: block;">
+                                            <span class="panel-icon">
+                <i class="fas fa-chart-area"></i>
+              </span>
+                                            <span class="panel-title">Short Term Fuel Trim Bank 1</span>
+                                        </div>
+                                        <div class="panel-body bg-light dark" style="display: block;">
+                                            <div>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td>
+
+                                        <div class="panel-heading" style="display: block;">
+                                            <span class="panel-icon">
+                <i class="fas fa-chart-area"></i>
+              </span>
+                                            <span class="panel-title">Short Term Fuel Trim Bank 2</span>
+                                        </div>
+                                        <div class="panel-body bg-light dark" style="display: block;">
+                                            <div>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td>
+
+                                        <div class="panel-heading" style="display: block;">
+                                            <span class="panel-icon">
+                <i class="fas fa-chart-area"></i>
+              </span>
+                                            <span class="panel-title">Term Fuel Trim Bank 1</span>
+                                        </div>
+                                        <div class="panel-body bg-light dark" style="display: block;">
+
+                                        </div>
+                                    </td>
+
+                                </tr>
+                            </table>
+
+
+                        </section>
+
+                        <hr>
+
+
+                        <img src="../img/KeenHeftyEquestrian-size_restricted%20.gif" alt="" class="img-fluid" width="100%">
+
+
+                        <div style="background-color:#3061b5;padding: 0.2rem 1rem; margin: 1rem 0rem" class="text-white">
+                            <h2 class="" style="font-weight:300">Mission Prognosis</h2>
+                        </div>
+
+
+
+                        <section class="table-layout" style="display:block;">
+
+                            <h2>Engine</h2>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 5%"></div>
+                            </div>
+
+                            <table>
+                                <tr>
+
+                                    <td>
+                                        <div class="panel" id="timing-advance" style="display: block;">
+                                            <div class="panel-heading" style="display: block;">
+                                                <span class="panel-icon">
+                <i class="fas fa-chart-area"></i>
+              </span>
+                                                <span class="panel-title">Timing Advance</span>
+                                            </div>
+                                            <div class="panel-body bg-light dark" style="display: block;">
+                                                <div id="zoom-timing-advance" style="height: 100%; width: 100%;"></div>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <div class="panel" id="air-intake-temp" style="display: block;">
+                                            <div class="panel-heading" style="display: block;">
+                                                <span class="panel-icon">
+                <i class="fas fa-chart-area"></i>
+              </span>
+                                                <span class="panel-title">Air Intake Temp</span>
+                                            </div>
+                                            <div class="panel-body bg-light dark" style="display: block;">
+                                                <div id="zoom-air-intake-temp" style="height: 100%; width: 100%;"></div>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <div class="panel" id="engine-load" style="display: block;">
+                                            <div class="panel-heading" style="display: block;">
+                                                <span class="panel-icon">
+                <i class="fas fa-chart-area"></i>
+              </span>
+                                                <span class="panel-title">Engine Load</span>
+                                            </div>
+                                            <div class="panel-body bg-light dark" style="display: block;">
+                                                <div id="zoom-engine-load" style="height: 100%; width: 100%;"></div>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <div class="panel" id="engine-runtime" style="display: block;">
+                                            <div class="panel-heading" style="display: block;">
+                                                <span class="panel-icon">
+                <i class="fas fa-chart-area"></i>
+              </span>
+                                                <span class="panel-title">Engine Runtime</span>
+                                            </div>
+                                            <div class="panel-body bg-light dark" style="display: block;">
+                                                <div id="zoom-engine-runtime" style="height: 100%; width: 100%;"></div>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <div class="panel" id="intake-manifold-pressure" style="display: block;">
+                                            <div class="panel-heading" style="display: block;">
+                                                <span class="panel-icon">
+                <i class="fas fa-chart-area"></i>
+              </span>
+                                                <span class="panel-title">Intake Manifold Pressure</span>
+                                            </div>
+                                            <div class="panel-body bg-light dark" style="display: block;">
+                                                <div id="zoom-intake-manifold-pressure" style="height: 100%; width: 100%;"></div>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <div class="panel" id="maf" style="display: block;">
+                                            <div class="panel-heading" style="display: block;">
+                                                <span class="panel-icon">
+                <i class="fas fa-chart-area"></i>
+              </span>
+                                                <span class="panel-title">MAF</span>
+                                            </div>
+                                            <div class="panel-body bg-light dark" style="display: block;">
+                                                <div id="zoom-maf" style="height: 100%; width: 100%;"></div>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <div class="panel" id="engine-rpm" style="display: block;">
+                                            <div class="panel-heading" style="display: block;">
+                                                <span class="panel-icon">
+                <i class="fas fa-chart-area"></i>
+              </span>
+                                                <span class="panel-title">Engine RPM</span>
+                                            </div>
+                                            <div class="panel-body bg-light dark" style="display: block;">
+                                                <div id="zoom-engine-rpm" style="height: 100%; width: 100%;"></div>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                </tr>
+                            </table>
+
+
+
+
+                            <h2>General</h2>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 15%"></div>
+                            </div>
+                            <table>
+                                <tr>
+
+                                    <td>
+                                        <div class="panel" id="speed" style="display: block;">
+                                            <div class="panel-heading" style="display: block;">
+                                                <span class="panel-icon">
+                <i class="fas fa-chart-area"></i>
+              </span>
+                                                <span class="panel-title">Speed</span>
+                                            </div>
+                                            <div class="panel-body bg-light dark" style="display: block;">
+                                                <div id="zoom-speed" style="height: 100%; width: 100%;"></div>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <div class="panel" id="ambient-air-temp" style="display: block;">
+                                            <div class="panel-heading" style="display: block;">
+                                                <span class="panel-icon">
+                <i class="fas fa-chart-area"></i>
+              </span>
+                                                <span class="panel-title">Ambient Air Temp</span>
+                                            </div>
+                                            <div class="panel-body bg-light dark" style="display: block;">
+                                                <div id="zoom-ambient-air-temp" style="height: 100%; width: 100%;"></div>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <div class="panel" id="throttle-pos" style="display: block;">
+                                            <div class="panel-heading" style="display: block;">
+                                                <span class="panel-icon">
+                <i class="fas fa-chart-area"></i>
+              </span>
+                                                <span class="panel-title">Throttle Pos</span>
+                                            </div>
+                                            <div class="panel-body bg-light dark" style="display: block;">
+                                                <div id="zoom-throttle-pos" style="height: 100%; width: 100%;"></div>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <div class="panel" id="dtc-number" style="display: block;">
+                                            <div class="panel-heading" style="display: block;">
+                                                <span class="panel-icon">
+                <i class="fas fa-chart-area"></i>
+              </span>
+                                                <span class="panel-title">DTC Number</span>
+                                            </div>
+                                            <div class="panel-body bg-light dark" style="display: block;">
+                                                <div id="zoom-dtc-number" style="height: 100%; width: 100%;"></div>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <div class="panel" id="trouble-codes" style="display: block;">
+                                            <div class="panel-heading" style="display: block;">
+                                                <span class="panel-icon">
+                <i class="fas fa-chart-area"></i>
+              </span>
+                                                <span class="panel-title">Trouble Codes</span>
+                                            </div>
+                                            <div class="panel-body bg-light dark" style="display: block;">
+                                                <div id="zoom-trouble-codes" style="height: 100%; width: 100%;"></div>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <div class="panel" id="barometric-pressure" style="display: block;">
+                                            <div class="panel-heading" style="display: block;">
+                                                <span class="panel-icon">
+                <i class="fas fa-chart-area"></i>
+              </span>
+                                                <span class="panel-title">Barometric Pressure</span>
+                                            </div>
+                                            <div class="panel-body bg-light dark" style="display: block;">
+                                                <div id="zoom-barometric-pressure" style="height: 100%; width: 100%;"></div>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <div class="panel" id="equiv-ratio" style="display: block;">
+                                            <div class="panel-heading" style="display: block;">
+                                                <span class="panel-icon">
+                <i class="fas fa-chart-area"></i>
+              </span>
+                                                <span class="panel-title">Equiv Ratio</span>
+                                            </div>
+                                            <div class="panel-body bg-light dark" style="display: block;">
+                                                <div id="zoom-equiv-ratio" style="height: 100%; width: 100%;"></div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+
+
+
+
+                            <h2>Battery</h2>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 25%"></div>
+                            </div>
+                            <table>
+                                <tr>
+
+                                    <td>
+                                        <div class="panel" id="battery-voltage" style="display: block;">
+                                            <div class="panel-heading" style="display: block;">
+                                                <span class="panel-icon">
+                <i class="fas fa-chart-area"></i>
+              </span>
+                                                <span class="panel-title">Battery Voltage</span>
+                                            </div>
+                                            <div class="panel-body bg-light dark" style="display: block;">
+                                                <div id="zoom-battery-voltage" style="height: 100%; width: 100%;"></div>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                </tr>
+                            </table>
+
+
+
+
+                            <h2>Fuel</h2>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 45%"></div>
+                            </div>
+                            <table>
+                                <tr>
+
+                                    <td>
+                                        <div class="panel-heading" style="display: block;">
+                                            <span class="panel-icon">
+                <i class="fas fa-chart-area"></i>
+              </span>
+                                            <span class="panel-title">Fuel Economy</span>
+                                        </div>
+                                        <div class="panel-body bg-light dark" style="display: block;">
+                                            <div>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td>
+
+                                        <div class="panel-heading" style="display: block;">
+                                            <span class="panel-icon">
+                <i class="fas fa-chart-area"></i>
+              </span>
+                                            <span class="panel-title">Fuel Level</span>
+                                        </div>
+                                        <div class="panel-body bg-light dark" style="display: block;">
+                                            <div>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td>
+
+                                        <div class="panel-heading" style="display: block;">
+                                            <span class="panel-icon">
+                <i class="fas fa-chart-area"></i>
+              </span>
+                                            <span class="panel-title">Fuel Pressure</span>
+                                        </div>
+                                        <div class="panel-body bg-light dark" style="display: block;">
+                                            <div>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td>
+
+                                        <div class="panel-heading" style="display: block;">
+                                            <span class="panel-icon">
+                <i class="fas fa-chart-area"></i>
+              </span>
+                                            <span class="panel-title">Fuel Type</span>
+                                        </div>
+                                        <div class="panel-body bg-light dark" style="display: block;">
+                                            <div>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td>
+
+                                        <div class="panel-heading" style="display: block;">
+                                            <span class="panel-icon">
+                <i class="fas fa-chart-area"></i>
+              </span>
+                                            <span class="panel-title">Long Term Fuel Trim Bank 2</span>
+                                        </div>
+                                        <div class="panel-body bg-light dark" style="display: block;">
+
+                                        </div>
+                                    </td>
+
+                                    <td>
+
+                                        <div class="panel-heading" style="display: block;">
+                                            <span class="panel-icon">
+                <i class="fas fa-chart-area"></i>
+              </span>
+                                            <span class="panel-title">Short Term Fuel Trim Bank 1</span>
+                                        </div>
+                                        <div class="panel-body bg-light dark" style="display: block;">
+                                            <div>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td>
+
+                                        <div class="panel-heading" style="display: block;">
+                                            <span class="panel-icon">
+                <i class="fas fa-chart-area"></i>
+              </span>
+                                            <span class="panel-title">Short Term Fuel Trim Bank 2</span>
+                                        </div>
+                                        <div class="panel-body bg-light dark" style="display: block;">
+                                            <div>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td>
+
+                                        <div class="panel-heading" style="display: block;">
+                                            <span class="panel-icon">
+                <i class="fas fa-chart-area"></i>
+              </span>
+                                            <span class="panel-title">Term Fuel Trim Bank 1</span>
+                                        </div>
+                                        <div class="panel-body bg-light dark" style="display: block;">
+
+                                        </div>
+                                    </td>
+
+                                </tr>
+                            </table>
+
+
+                        </section>
+
+
+
+
+
+
+
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Assign to the mission</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+
+</html>

@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  db:
+    image: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - ~/postgres-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: optimus
+      POSTGRES_USER: optimus
+  web:
+    build: .
+    command: >
+      bash -c "python manage.py migrate --noinput --settings=optimus.settings_staging
+      && gunicorn --pythonpath . --env DJANGO_SETTINGS_MODULE=optimus.settings_staging optimus.wsgi -b 0.0.0.0:8000"
+    restart: unless-stopped
+
+    ports:
+      - "80:8000"
+    depends_on:
+      - db
+

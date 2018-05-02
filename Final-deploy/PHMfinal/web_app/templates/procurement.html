@@ -1,0 +1,50 @@
+{% extends "web_app_base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="" style="display:block; width: 70%; margin: auto;">
+        <div class="panel" id="spy2">
+            <div class="panel-body pn">
+            <br>
+            <button class="btn-exceltable">REPORT</button>
+               <br><br>
+
+                <table class="table footable exceltable" data-filter="#fooFilter">
+                    <thead>
+                    <tr>
+                        <th colspan="4" class="text-center">Subsystem
+                            procurement
+                    analysis</th>
+                    </tr>
+                    <tr>
+                        <th style="width: 50%">Name</th>
+                        <th>Vehicle</th>
+                        <th>Health</th>
+                        <th>To procure</th>
+                    </tr>
+                    </thead>
+                    {% for ss in concretesubsystem_list %}
+                        <tr>
+                            <td>{{ ss.subsystem.name }}</td>
+                            <td>{{ ss.vehicle }}</td>
+                            <td>
+                                {% if ss.health < 60 %}
+                                    <span style="color: #fe1610">{{ ss.health }}</span>
+                                {% elif ss.health >= 60 and ss.health < 80%}
+                                    <span style="color: #fef73f">{{ ss.health }}</span>
+                                {% else %}
+                                    <span style="color: #5ffe3e">{{ ss.health }}</span>
+                                {% endif %}
+
+                            </td>
+                            <td>
+                                <input type="checkbox" name="" id="">
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
