@@ -1,4 +1,4 @@
-# SoftwareArchitecture
+# Software Architecture
 In this repository there exists some web resources coded during Software Architecture course lectures
 
 # About this course
