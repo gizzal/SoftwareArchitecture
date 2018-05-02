@@ -1,3 +1,6 @@
+Created and maintained by Carlos Rojas for Software Architecture in Innopolis University
+
+
 # SoftwareArchitecture
 In this repository there exists some web resources coded during Software Architecture course lectures
 
