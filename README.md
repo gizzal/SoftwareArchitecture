@@ -1,4 +1,4 @@
-Created and maintained by # Carlos Rojas # for Software Architecture in Innopolis University
+Created and maintained by: Carlos Rojas for Software Architecture in Innopolis University
 
 
 # SoftwareArchitecture
